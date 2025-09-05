@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: shopper_recurrence_rate
+    description: >
+      Calculates the monthly recurrence rate of shoppers per merchant. 
+      A shopper is considered recurrent if they purchased in a given closed month 
+      and also made a previous purchase at the same merchant within the last 12 months.
+    columns:
+      - name: order_month
+        description: "Month (truncated to first day) when the purchases took place."
+        tests:
+          - not_null
+
+      - name: merchant_name
+        description: "Name of the merchant where the purchases occurred."
+        tests:
+          - not_null
+
+      - name: recurrence_rate
+        description: >
+          Percentage of shoppers that are considered recurrent for a given merchant 
+          and month. Formula: (recurrent shoppers / total shoppers) * 100.
+        tests:
+          - not_null
