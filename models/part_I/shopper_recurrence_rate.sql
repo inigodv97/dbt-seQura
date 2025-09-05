@@ -77,7 +77,7 @@ total_shoppers AS (
         orders_cleaned
     WHERE order_month <= (SELECT last_closed_month FROM last_closed)
     GROUP BY merchant_id, order_month
-    ORDER BY merchant_id, order_month
+    
 )
 
 -- Recurrence rate per merchant and month: Formula = (recurrent shoppers / total shoppers) * 100
