@@ -3,12 +3,12 @@
 ## PART I - Data Extraction (SQL)
 
 Calculating shopper’s recurrence rate for each month and merchant, as explained in the exercise.
-The provided "orders_merchant.csv" CSV file was split into **two seed tables** which were later used in the model.
+The provided `orders_merchant.csv` CSV file was split into **two seed tables** which were later used in the model.
 
 The model was developed and executed in a **dbt Cloud project** connected to **BigQuery**.  
 All modeling and development work was carried out locally using **Visual Studio Code** together with the **dbt CLI**
 
-Inside the "models/part_I" folder you will find a CSV of the output given by the model, named "model_output.csv". 
+Inside the `models/part_I` folder you will find a CSV of the output given by the model, named **`model_output.csv`**. 
 
 ## PART II - Data Modeling (DBT)
 
