@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: default_ratio
+    description: >
+      Calculates the default ratio per month, based on the sum of loans and the 
+      overdue debt (principal + fees). The ratio is computed as 
+      `total_debt / total_loans`.
+    columns:
+      - name: month_year_order
+        description: "Month (truncated to the first day) of the order_date used as the aggregation key."
+        tests:
+          - not_null
+
+      - name: total_debt
+        description: "Total overdue debt amount (principal + fees) for all loans in arrears in that month."
+        tests:
+          - not_null          
+
+      - name: total_loans
+        description: "Total loan amount issued in that month, including both defaulted and non-defaulted loans."
+        tests:
+          - not_null
+
+      - name: default_ratio
+        description: "Ratio of total_debt over total_loans, rounded to two decimals. Represents the percentage of loans in default for the month."
+        tests:
+          - not_null

@@ -1,0 +1,58 @@
+version: 2
+
+models:
+  - name: unbalanced_orders
+    description: >
+      Enriched view of orders with shopper demographics and default information.  
+      Includes shopper age, product and merchant identifiers, default type,  
+      number of days unbalanced, and categorization of overdue periods (both numeric buckets and boolean flags).
+    columns:
+      - name: shopper_age
+        description: "Age of the shopper at the time of the order (sourced from dim_shoppers)."
+        tests:
+          - not_null
+
+      - name: month_year_order
+        description: "Month (truncated to the first day) of the order_date."
+        tests:
+          - not_null
+
+      - name: product
+        description: "Product identifier linked to the order."
+        tests:
+          - not_null
+
+      - name: merchant
+        description: "Merchant identifier linked to the order."
+        tests:
+          - not_null
+
+      - name: default_type
+        description: "Default type assigned to the order (from rel_default_order_type)."
+
+      - name: days_unbalanced
+        description: "Number of days the order has been in arrears (overdue)."
+        tests:
+          - not_null
+          - accepted_range:
+              min_value: 0
+
+      - name: delayed_period
+        description: >
+          Overdue period bucket (17, 30, 60, 90).  
+          Assigned as the closest standardized bucket for the number of days in arrears.
+        tests:
+          - accepted_values:
+              values: [17, 30, 60, 90]
+
+      - name: is_in_period_17
+        description: "TRUE if the order has been in arrears for at least 17 days."
+
+      - name: is_in_period_30
+        description: "TRUE if the order has been in arrears for at least 30 days."
+
+      - name: is_in_period_60
+        description: "TRUE if the order has been in arrears for at least 60 days."
+
+      - name: is_in_period_90
+        description: "TRUE if the order has been in arrears for at least 90 days."
